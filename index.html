@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
+
+</head>
+<body class="body">
+    <div class="container">
+        <div class="imagediv">
+            <img src="./images/Dictionary-pana.png" alt="">
+        </div>
+        <div class="card" >
+            <div >
+                <h1 class="heading">DICTIONARY</h1>
+                <input type="text" id="inputtag" class="input-box">
+                <button type="submit" id="button" class="btn">SEARCH<button>
+            </div>
+            <div class="divone">
+                <h3 id="definition">Definition:</h3>
+                <p id="definitionpara"></p>
+            </div>
+            <div class="divtwo" >
+                <h3 id="synonym">Synonym:</h3>
+                <p id="synonympara"></p>
+            </div>
+            <div class="divthree">
+                <h3 id="antonym">Antonym:</h3>
+                <p id="antonympara"></p>
+
+            </div>
+            <div class="divfour">
+                <h3 id="partOfSpeech">Part of speech:</h3>
+                <p id="speech"></p>
+
+            </div>
+            
+            <script>
+                let definitionpara=document.getElementById("definitionpara");
+                let synonympara=document.getElementById("synonympara");
+                let antonympara=document.getElementById("antonympara");
+                let speech=document.getElementById("speech");
+                let inputtag=document.getElementById("inputtag")
+                let button=document.getElementById("button");
+
+                button.addEventListener("click",()=>{
+
+fetch("https://api.dictionaryapi.dev/api/v2/entries/en/"+inputtag.value).then((anyvariable)=>anyvariable.json())
+.then((output)=>{
+    console.log(output);
+    output[0].meanings[0].definitions.map((dd)=>
+
+    
+    {
+      
+
+        let newpara = document.createElement("p");
+        // let newparaone = document.createElement("p");
+
+        newpara.innerHTML = dd.definition
+        // newparaone.innerHTML = ddd.synonym
+
+
+        console.log("dd",newpara);
+        // console.log("ddd",newpara);
+
+        definitionpara.appendChild(newpara)
+        // synonympara.appendChild(newpara)
+
+        console.log("definitions",dd.definition);
+        // console.log("synonyms",ddd.synonym);
+
+        
+  
+})
+// console.log(output);
+// ;
+//     console.log(output);
+// output[0].meanings[0].antonyms.map((dddd)=>
+
+    
+//     {
+      
+
+//         // let newpara = document.createElement("p");
+//         let newparatwo = document.createElement("ppp");
+
+//         // newpara.innerHTML = dd.definition
+//         newparatwo.innerHTML = dddd.antonym
+
+
+//         // console.log("dd",newpara);
+//         console.log("dddd",newparatwo);
+
+//         // definitionpara.appendChild(newpara)
+//         antonympara.appendChild(newparatwo);
+
+//         // console.log("definitions",dd.definition);
+//         console.log("antonyms",dddd.antonym);
+
+        
+//     })  
+    // newpara.innerHTML =(output[0].meanings[0].definitions)== undefined ? "There is no definition available" : (output[0].meanings[0].definitions);
+
+    speech.innerHTML = output[0].meanings[0].partOfSpeech ==undefined ? "There is no part of speech data available":output[0].meanings[0].partOfSpeech;
+    synonympara.innerHTML = output[0].meanings[0].synonyms[0] == undefined ? "there is no Synonym data available":output[0].meanings[0].synonyms[0];
+    antonympara.innerHTML = output[0].meanings[0].antonyms[0] == undefined ? "There is no antonym data available":antonympara.innerHTML = output[0].meanings[0].antonyms[0];
+
+    console.log(output[0].meanings[0].synonyms[0]);
+    console.log(output[0].meanings[0].antonyms[0]);
+    console.log(output[0].meanings[0].partOfSpeech);
+
+
+
+
+
+
+
+
+    
+
+})   
+                })
+    </script>
+</body>
+</html>
